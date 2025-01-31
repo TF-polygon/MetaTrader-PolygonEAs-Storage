@@ -1,4 +1,4 @@
-# EA-Storage
+# MetaTrader-PolygonEAs-Storage
 This repository is to save my works of EA. I will distribute EAs implemented in my own way, from simple trading strategy steps to application steps. And I will briefly explain what strategy each EA was implemented based on, what logic it was implemented with, and what purpose it was implemented with.
 
 The version update status of each EA is listed in descending order starting from the latest version.

@@ -93,7 +93,7 @@ void Init(void) {
    _pip = symbol == E ? 0.0001 : symbol == X ? 0.01 : 0.01;
 }
 
-class Position {
+struct Position {
 private:
 // Trading Option
    int      m_Op;
@@ -105,23 +105,22 @@ private:
    double   m_Lot;
    
 public:
-// Default constructor
-   Position() { }
-// Parametric constructor
-   Position(int op, int ticket_num, double bep, double lot) {
+// Initialize the order
+   void init(void) {
+      m_Op     = NULL;
+      m_Ticket = NULL;
+      m_Bep    = NULL;
+      m_Lot    = NULL;
+   }
+// Open the order
+   void open(int op, int ticket, double bep, double lot) {
       m_Op     = op;
-      m_Ticket = ticket_num;
+      m_Ticket = ticket;
       m_Bep    = bep;
       m_Lot    = lot;
    }
-// Destructor
-   ~Position() { }
 
-public:
-   void set_Lot(double lot)      { m_Lot = lot; }
-   void set_Bep(double bep)      { m_Bep = bep; }
-   void set_TicketNum(int num)   { m_Ticket = num; }
-      
+public:      
    inline int     get_Op(void)         { return m_Op; }
    inline double  get_Lot(void)        { return m_Lot; }
    inline double  get_Bep(void)        { return m_Bep; }

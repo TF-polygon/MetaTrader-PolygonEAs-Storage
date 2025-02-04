@@ -10,16 +10,14 @@
 
 #include <OsMSR-SimpleTrade/Core.mqh>
 
-Position *pos;
+Position pos;
 
 int OnInit() {
    Init();
    return(INIT_SUCCEEDED);
 }
 
-void OnDeinit(const int reason) {
-   delete pos;
-}
+void OnDeinit(const int reason) { }
 
 void OnTick() {
    Start();
@@ -77,7 +75,7 @@ void Start(void) {
       if (_macd > 0 && _rsi >= 50 && _long_stoch) {
          int ticket = OrderSend(Symbol(), OP_BUY, cur_lot, Ask, TEMP_SLIPPAGE, 0, 0, NULL, magic_number, 0, clrBlue);
          if (ticket != ZERO) {
-            pos = new Position(OP_BUY, ticket, Ask, cur_lot);
+            pos.open(OP_BUY, ticket, Ask, cur_lot);
             _prev_lotsize = pos.get_Lot();
          }
          else
@@ -87,7 +85,7 @@ void Start(void) {
       else if (_macd < 0 && _rsi <= 50 && _short_stoch) {
          int ticket =  OrderSend(Symbol(), OP_SELL, cur_lot, Bid, TEMP_SLIPPAGE, 0, 0, NULL, magic_number, 0, clrRed);
          if (ticket != ZERO) {
-            pos = new Position(OP_SELL, ticket, Bid, cur_lot);
+            pos.open(OP_SELL, ticket, Bid, cur_lot);
             _prev_lotsize = pos.get_Lot();
          }
          else
@@ -131,7 +129,7 @@ void close(void) {
       default:
          break;
       }
-      delete pos;
+      pos.init();
    } 
    else
       Print("Failed to close the order, Ticket No.", pos.get_Ticket(), "  ", pos.get_Op());

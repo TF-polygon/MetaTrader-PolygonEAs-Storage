@@ -17,6 +17,7 @@ Maximal Drawdown: ff% in EURUSD <br>
 Description: OsMSR-SimpleTrade make an entry signal using each signal of indicators and open and close the order through the signal. The user can set values both TP and SL in the system trading property. And this is one of the trading strategies that has a risk ratio for each open position, not a grid strategy. A new position can be opened only when the open position is closed. Therefore, it is important to set the risk ratio appropriately according to the volatility range of each Symbol. While it is common to include GBPUSD as a recommended symbol, I personally don't think GBPUSD is suitable for users looking to leverage martingale properties in their trading due to its volatility range. <br>
 
 #### Release note
+- 2025-02-04: Converting 'class' to 'struct' due to some memory issues.
 - 2025-01-31: Released first
 
 ### Link for Subscription

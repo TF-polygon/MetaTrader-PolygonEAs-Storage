@@ -11,8 +11,8 @@ Property: Martingale, Take profit(TP) & Stop loss(SL) value settings, input sett
 Recommended symbol: EURUSD, USDCAD, NZDUSD, USDJPY <br>
 Maximal Drawdown: 33.14% in EURUSD <br>
 <p>
-    <img src="https://github.com/user-attachments/assets/3b7a43a2-318c-4070-9962-91f39346cc4e" width="400" height="200">
-    <img src="https://github.com/user-attachments/assets/1e8d6c4c-caf5-479d-ae24-f28132a03592" width="400" height="200">
+    <img src="https://github.com/user-attachments/assets/3b7a43a2-318c-4070-9962-91f39346cc4e" width="400" height="175">
+    <img src="https://github.com/user-attachments/assets/2df9e1f1-d73a-422e-b2a5-73ae096898a4" width="400" height="175">
 </p>
 Description: OsMSR-SimpleTrade make an entry signal using each signal of indicators and open and close the order through the signal. The user can set values both TP and SL in the system trading property. And this is one of the trading strategies that has a risk ratio for each open position, not a grid strategy. A new position can be opened only when the open position is closed. Therefore, it is important to set the risk ratio appropriately according to the volatility range of each Symbol. While it is common to include GBPUSD as a recommended symbol, I personally don't think GBPUSD is suitable for users looking to leverage martingale properties in their trading due to its volatility range. <br>
 

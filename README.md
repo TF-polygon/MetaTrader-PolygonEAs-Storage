@@ -9,7 +9,7 @@ Some EAs don't deploy ex and mql files for commercial purposes. If you would lik
 Used indicators: OsMA or [Pine]MACD Histogram, RSI, Stochastic, EMA <br>
 Property: Martingale, Take profit(TP) & Stop loss(SL) value settings, input settings each indicators <br>
 Recommended symbol: EURUSD, USDCAD, NZDUSD, USDJPY <br>
-Maximal Drawdown: ff% in EURUSD <br>
+Maximal Drawdown: 33.14% in EURUSD <br>
 <p>
     <img src="https://github.com/user-attachments/assets/3b7a43a2-318c-4070-9962-91f39346cc4e" width="400" height="200">
     <img src="https://github.com/user-attachments/assets/1e8d6c4c-caf5-479d-ae24-f28132a03592" width="400" height="200">
@@ -19,6 +19,21 @@ Description: OsMSR-SimpleTrade make an entry signal using each signal of indicat
 #### Release note
 - 2025-02-04: Converting 'class' to 'struct' due to some memory issues.
 - 2025-01-31: Released first
+
+### 2. OsMSR-Averaging
+Used indicators: OsMA or [Pine]MACD Histogram, RSI, Stochastic, EMA <br>
+Property: Martingale, Average price(Take profit-%), Distance of grid <br>
+Recommended symbol: EURUSD, GBPUSD, USDCAD, XAUUSD, USDJPY <br>
+Max Drawdown: preparing... <br>
+<p>
+    <img src="https://github.com/user-attachments/assets/38a1c823-0894-4dd1-ac2a-fedfe9de0bd3" width="400" height="200">
+    <img src="https://github.com/user-attachments/assets/0130b4c8-423f-4e8d-b447-e40b90867e15" width="400" height="200">
+</p>
+Description: Grid strategy, also known as averaging, is a technique that has been used in financial market for a long time. It aims to adjust the average price by placing buy and sell orders at regular intervals using price volatility, thereby profiting from the natural flucuations of the market. The basic principle of grid trading is to generate profit by repeatly executing buy and sell orders at pre-set price intervals when the market flucuatate within a certain range. This approache focuses on price volatility rather than directional predictions and can be particularly effective in sideways or volatile markets. That's why GBPUSD and XAUUSD, which are among the most volatile major currency pairs, are included in the Recommended symbol.
+
+#### Release note
+- 2023-02-05: Released first
+
 
 ### Link for Subscription
 preparing..

@@ -102,5 +102,5 @@ void Init(void) {
    ArrayResize(Short_Lot, TRADING_SIZE);
 }
 
-inline double pip(double val) { return val * 0.0001; }
-inline double rev(double val) { return val / 0.0001; }.0001; }
+inline double pip(double val) { return val * _pip; }
+inline double rev(double val) { return val / _pip; }

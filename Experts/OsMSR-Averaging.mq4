@@ -173,4 +173,4 @@ void CLOSE(const int op) {
 
 bool Is_empty(void) {
    return(Long_Idx == INDEX_INIT_VAL && Short_Idx == INDEX_INIT_VAL);
-}}
+}

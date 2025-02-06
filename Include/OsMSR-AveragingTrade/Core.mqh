@@ -103,4 +103,4 @@ void Init(void) {
 }
 
 inline double pip(double val) { return val * 0.0001; }
-inline double rev(double val) { return val / 0.0001; }
+inline double rev(double val) { return val / 0.0001; }.0001; }

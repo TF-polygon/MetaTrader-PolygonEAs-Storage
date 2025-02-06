@@ -11,7 +11,7 @@
 #include <OsMSR-Averaging/Core.mqh>
 
 int OnInit() {
-
+   Init();
    return(INIT_SUCCEEDED);
 }
 
@@ -84,8 +84,8 @@ void ADD(const int op) {
    double lot;
    switch (op) {
    case OP_BUY:
-      if (Long_Idx > INDEX_INIT_VAL && Long_Idx < TRADING_SIZE - 1 && pip(Long_EntryPrice[Long_Idx] - Ask) >= dist) {
-         lot = Is_onMartingaleMode ? Long_Lot[Long_Idx] * martin_mult : _proportional_lotsize;
+      if (Long_Idx > INDEX_INIT_VAL && Long_Idx < TRADING_SIZE - 1 && rev(Long_EntryPrice[Long_Idx] - Ask) >= dist) {
+         lot = Is_onMartingaleMode && Long_Idx >= martin_begin - 1 ? Long_Lot[Long_Idx] * martin_mult : _proportional_lotsize;
          Long_Ticket[++Long_Idx] = OrderSend(NULL, OP_BUY, lot, Ask, TEMP_SLIPPAGE, 0, 0, NULL, magic_number, 0, clrBlue);
          if (Long_Ticket[Long_Idx] > 0) {
             Long_EntryPrice[Long_Idx] = Ask;
@@ -94,8 +94,8 @@ void ADD(const int op) {
       }
       break;
    case OP_SELL:
-      if (Short_Idx > INDEX_INIT_VAL && Short_Idx < TRADING_SIZE - 1 && pip(Bid - Short_EntryPrice[Short_Idx]) >= dist) {
-         lot = Is_onMartingaleMode ? Long_Lot[Long_Idx] * martin_mult : _proportional_lotsize;
+      if (Short_Idx > INDEX_INIT_VAL && Short_Idx < TRADING_SIZE - 1 && rev(Short_EntryPrice[Short_Idx] - Bid) <= -dist) {
+         lot = Is_onMartingaleMode && Short_Idx >= martin_begin - 1 ? Short_Lot[Short_Idx] * martin_mult : _proportional_lotsize;
          Short_Ticket[++Short_Idx] = OrderSend(NULL, OP_SELL, lot, Bid, TEMP_SLIPPAGE, 0, 0, NULL, magic_number, 0, clrRed);
          if (Short_Ticket[Short_Idx] > 0) {
             Short_EntryPrice[Short_Idx] = Bid;
@@ -109,36 +109,61 @@ void ADD(const int op) {
 void CLOSE(const int op) {
    if (OrdersTotal() == 0) return;
    
-   double ave_profit = ZERO_FLOAT;
+   double pip_sum = ZERO_FLOAT;
+   
    
    switch (op) {
    case OP_BUY:
-      for (int i = Long_Idx; i >= 0; i--)
-         ave_profit += Long_EntryPrice[i];
-      ave_profit /= (Long_Idx - 1);
-      if (Bid >= ave_profit * (1 + take_profit / 100)) {
-         for (int i = Long_Idx; i >= 0; i--, Long_Idx--) {
-            int closed_ticket = OrderClose(Long_Ticket[i], Long_Lot[i], Bid, TEMP_SLIPPAGE, clrOrange);
+      if (Long_Idx == 0) {
+         if (rev(Bid - Long_EntryPrice[Long_Idx]) >= dist) {
+            int closed_ticket = OrderClose(Long_Ticket[Long_Idx], Long_Lot[Long_Idx], Bid, TEMP_SLIPPAGE, clrOrange);
             if (closed_ticket) {
-               Long_Ticket[i] = ZERO;
-               Long_EntryPrice[i] = ZERO_FLOAT;
-               Long_Lot[i] = ZERO_FLOAT;
+               Long_Ticket[Long_Idx] = ZERO;
+               Long_EntryPrice[Long_Idx] = ZERO_FLOAT;
+               Long_Lot[Long_Idx--] = ZERO_FLOAT;
+            }
+         }
+      }
+      else if (Long_Idx != INDEX_INIT_VAL) {
+         for (int i = Long_Idx; i >= 0; i--)
+            pip_sum += rev(Bid - Long_EntryPrice[i]);
+         
+         if (pip_sum >= 15 * (Long_Idx + 1)) {
+            for (int i = Long_Idx; i >= 0; i--, Long_Idx--) {
+               int closed_ticket = OrderClose(Long_Ticket[i], Long_Lot[i], Bid, TEMP_SLIPPAGE, clrOrange);
+               if (closed_ticket) {
+                  Long_Ticket[i] = ZERO;
+                  Long_EntryPrice[i] = ZERO_FLOAT;
+                  Long_Lot[i] = ZERO_FLOAT;
+               }
             }
          }
       }
       return;
    
    case OP_SELL:
-      for (int i = Short_Idx; i >= 0; i--)
-         ave_profit += Short_EntryPrice[i];
-      ave_profit /= (Short_Idx - 1);
-      if (Ask <= ave_profit * (1 - take_profit / 100)) {
-         for (int i = Short_Idx; i >= 0; i--, Short_Idx--) {
-            int closed_ticket = OrderClose(Short_Ticket[i], Short_Lot[i], Ask, TEMP_SLIPPAGE, clrOrange);
+      if (Short_Idx == 0) {
+         if (rev(Short_EntryPrice[Short_Idx] - Ask) >= dist) {
+            int closed_ticket = OrderClose(Short_Ticket[Short_Idx], Short_Lot[Short_Idx], Ask, TEMP_SLIPPAGE, clrOrange);
             if (closed_ticket) {
-               Short_Ticket[i] = ZERO;
-               Short_EntryPrice[i] = ZERO_FLOAT;
-               Short_Lot[i] = ZERO_FLOAT; 
+               Short_Ticket[Short_Idx] = ZERO;
+               Short_EntryPrice[Short_Idx] = ZERO_FLOAT;
+               Short_Lot[Short_Idx--] = ZERO_FLOAT; 
+            }
+         }
+      }
+      else if (Short_Idx != INDEX_INIT_VAL) {
+         for (int i = Short_Idx; i >= 0; i--)
+            pip_sum += rev(Short_EntryPrice[i] - Ask);
+         
+         if (pip_sum >= 15 * (Short_Idx + 1)) {
+            for (int i = Short_Idx; i >= 0; i--, Short_Idx--) {
+               int closed_ticket = OrderClose(Short_Ticket[i], Short_Lot[i], Ask, TEMP_SLIPPAGE, clrOrange);
+               if (closed_ticket) {
+                  Short_Ticket[i] = ZERO;
+                  Short_EntryPrice[i] = ZERO_FLOAT;
+                  Short_Lot[i] = ZERO_FLOAT; 
+               }
             }
          }
       }
@@ -148,4 +173,4 @@ void CLOSE(const int op) {
 
 bool Is_empty(void) {
    return(Long_Idx == INDEX_INIT_VAL && Short_Idx == INDEX_INIT_VAL);
-}
+}}

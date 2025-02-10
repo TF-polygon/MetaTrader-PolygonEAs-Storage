@@ -31,6 +31,11 @@ Max Drawdown: 42.95% in EURUSD <br>
 </p>
 Description: Grid strategy, also known as averaging, is a technique that has been used in financial market for a long time. It aims to adjust the average price by placing buy and sell orders at regular intervals using price volatility, thereby profiting from the natural flucuations of the market. The basic principle of grid trading is to generate profit by repeatly executing buy and sell orders at pre-set price intervals when the market flucuatate within a certain range. This approache focuses on price volatility rather than directional predictions and can be particularly effective in sideways or volatile markets. That's why GBPUSD and XAUUSD, which are among the most volatile major currency pairs, are included in the Recommended symbol.
 
+#### Release note
+- 2025-02-06: Fixed errors of operator
+- 2025-02-05: Released first
+
+
 ### 3. HedgeStrategy
 Used indicators: Freely developed or EMA<br>
 Property: Risk, Distance (pip), R2R <br>
@@ -45,10 +50,6 @@ Max Drawdown: 12.57% in XAUUSD <br>
 
 #### Release note
 - 2025-02-11: Released first
-
-#### Release note
-- 2025-02-06: Fixed errors of operator
-- 2025-02-05: Released first
 
 
 ### Link for Subscription

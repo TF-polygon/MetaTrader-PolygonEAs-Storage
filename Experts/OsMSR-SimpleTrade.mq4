@@ -8,9 +8,89 @@
 #property version   "1.00"
 #property strict
 
-#include <OsMSR-SimpleTrade/Core.mqh>
+#include <Position.mqh>
 
-Position pos;
+enum Syminfo {
+   E = 0,   // EURUSD
+   X = 1,   // XAUUSD
+   U = 2    // USDJPY
+};
+
+extern string     ____CONSTANT_VARIABLES____ = "";
+
+input int         input_secret_code    = NULL; // Secret code
+input int         magic_number         = NULL; // Magic number
+input Syminfo     symbol               = E;    // Symbol
+input double      max_spread           = 5.0f;  // Spread (pip)
+
+extern string     ______MAIN__SETTINGS______ = "";
+
+input double      risk                 = 0.1f;
+
+input bool        Is_onMartingaleMode  = false; // Martingale
+input double      martin_val           = 2.0f;  // Mult
+input int         martin_begin         = 3;     // Starting point
+
+input double      take_profit          = 25;    // Take Profit(pip)
+input double      stop_loss            = 20;    // Stop Loss(pip)
+
+extern string     ___INDICATORS__SETTINGS___ = "";
+
+input int         ema_length1          = 5; // EMA length (1)
+input int         ema_length2          = 8; // EMA length (2)
+input int         ema_length3          = 13; // EMA length (3)
+// 136, 68, 34
+input int         rsi_length           = 14; // RSI length
+
+// extern string     ___STOCHASTIC__SETTINGS___ = ""; 
+
+input int         stoch_length         = 3; // Stoch length
+input int         stoch_k_period       = 14; // Stoch K period
+input int         stoch_d_period       = 3; // Stoch D period
+
+// extern string     ______MACD__SETTINGS______ = ""; // 
+
+input int         macd_fast_length     = 12; // Fast MA length
+input int         macd_slow_length     = 26; // Slow MA length
+input int         macd_signal_length   = 9; // Signal line length
+
+// --- Global variables
+double      _proportional_lotsize;
+double      _spread;
+double      _pip;
+int         _defeat_count;
+double      _prev_lotsize;
+
+// --- Indicator variables
+bool        _long_stoch;
+bool        _short_stoch;
+bool        _long_stoch_overflag;
+bool        _short_stoch_overflag;
+double      _rsi;
+double      _macd;
+bool        _long_ema;
+bool        _short_ema;
+
+// --- Trading variables
+
+s_Position pos;
+
+
+void Init(void) {
+   _proportional_lotsize = ZERO_FLOAT;
+   _rsi = ZERO_FLOAT;
+   _long_ema = false;
+   _short_ema = false;
+   _long_stoch = false;
+   _short_stoch = false;
+   _long_stoch_overflag = false;
+   _short_stoch_overflag = false;
+   _macd = ZERO_FLOAT;
+   _spread = ZERO_FLOAT;
+   _defeat_count = ZERO;
+   _prev_lotsize = ZERO_FLOAT;
+   _pip = symbol == E ? 0.0001 : symbol == X ? 0.01 : 0.01;
+}
 
 int OnInit() {
    Init();
@@ -61,7 +141,7 @@ bool MyEma(const int dir) {
 }
 
 void Start(void) {
-   _macd  = iCustom(NULL, 0, "[Pine]MACD Histogram", 12, 26, 9, 0, 0);
+   _macd  = iOsMA(Symbol(), 0, 12, 26, 9, PRICE_CLOSE, 0);
    _rsi   = iRSI(NULL, 0, rsi_length, PRICE_CLOSE, 0);
    // _long_ema = MyEma(LONG);
    // _short_ema = MyEma(SHORT);

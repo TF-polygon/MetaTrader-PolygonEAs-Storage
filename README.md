@@ -17,6 +17,7 @@ Maximal Drawdown: 33.14% in EURUSD <br>
 Description: OsMSR-SimpleTrade make an entry signal using each signal of indicators and open and close the order through the signal. The user can set values both TP and SL in the system trading property. And this is one of the trading strategies that has a risk ratio for each open position, not a grid strategy. A new position can be opened only when the open position is closed. Therefore, it is important to set the risk ratio appropriately according to the volatility range of each Symbol. While it is common to include GBPUSD as a recommended symbol, I personally don't think GBPUSD is suitable for users looking to leverage martingale properties in their trading due to its volatility range. <br>
 
 #### Release note
+- 2025-02-11: Refactoring
 - 2025-02-04: Converted 'class' to 'struct' due to some memory issues
 - 2025-01-31: Released first
 
@@ -32,6 +33,7 @@ Max Drawdown: 42.95% in EURUSD <br>
 Description: Grid strategy, also known as averaging, is a technique that has been used in financial market for a long time. It aims to adjust the average price by placing buy and sell orders at regular intervals using price volatility, thereby profiting from the natural flucuations of the market. The basic principle of grid trading is to generate profit by repeatly executing buy and sell orders at pre-set price intervals when the market flucuatate within a certain range. This approache focuses on price volatility rather than directional predictions and can be particularly effective in sideways or volatile markets. That's why GBPUSD and XAUUSD, which are among the most volatile major currency pairs, are included in the Recommended symbol.
 
 #### Release note
+- 2025-02-11: Refactoring
 - 2025-02-06: Fixed errors of operator
 - 2025-02-05: Released first
 

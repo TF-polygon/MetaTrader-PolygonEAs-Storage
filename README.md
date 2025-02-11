@@ -5,6 +5,8 @@ The version update status of each EA is listed in descending order starting from
 The EA operating platform is MT4 (Meta Trader 4), and most EAs are implemented in MQL4 (Meta Quotes Language 4). In the future, we will switch to EAs with the same logic to run on MT5, and we will slowly prepare and distribute two EAs for both versions. 
 Some EAs don't deploy ex and mql files for commercial purposes. If you would like to run it directly in your environment by reading the description of the EA, please prepare copy trading and subscription through the link below.
 
+📌 We are not responsible for any loss that may arise from applying the EAs included herein to your account.
+
 ### 1. OsMSR-SimpleTrade
 Used indicators: OsMA or [Pine]MACD Histogram, RSI, Stochastic, EMA <br>
 Property: Martingale, Take profit(TP) & Stop loss(SL) value settings, input settings each indicators <br>

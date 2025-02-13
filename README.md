@@ -7,21 +7,20 @@ Some EAs don't deploy ex and mql files for commercial purposes. If you would lik
 
 📌 We are not responsible for any loss that may arise from applying the EAs included herein to your account.
 
-### 1. OsMSR-SimpleTrade
-Used indicators: OsMA or [Pine]MACD Histogram, RSI, Stochastic, EMA <br>
-Property: Martingale, Take profit(TP) & Stop loss(SL) value settings, input settings each indicators <br>
-Recommended symbol: EURUSD, USDCAD, NZDUSD, USDJPY <br>
-Maximal Drawdown: 33.14% in EURUSD <br>
+### 3. HedgeStrategy
+Used indicators: Freely developed or EMA<br>
+Property: Risk, Distance (pip), R2R <br>
+Recommended Symbol: GBPUSD, USDJPY, XAUUSD <br>
+Max Drawdown: 12.57% in XAUUSD <br>
 <p>
-    <img src="https://github.com/user-attachments/assets/3b7a43a2-318c-4070-9962-91f39346cc4e" width="400" height="175">
-    <img src="https://github.com/user-attachments/assets/2df9e1f1-d73a-422e-b2a5-73ae096898a4" width="400" height="175">
+    <img src="https://github.com/user-attachments/assets/67e5ff60-35d6-4c47-91f9-208d298ae87c", width="400" height="200">
+    <img src="https://github.com/user-attachments/assets/6589a8ab-610c-496f-bd59-ee32fb2bac5d", width="400" height="200">
 </p>
-Description: OsMSR-SimpleTrade make an entry signal using each signal of indicators and open and close the order through the signal. The user can set values both TP and SL in the system trading property. And this is one of the trading strategies that has a risk ratio for each open position, not a grid strategy. A new position can be opened only when the open position is closed. Therefore, it is important to set the risk ratio appropriately according to the volatility range of each Symbol. While it is common to include GBPUSD as a recommended symbol, I personally don't think GBPUSD is suitable for users looking to leverage martingale properties in their trading due to its volatility range. <br>
+
+**Reference**: https://youtu.be/NGBPq_CSha8?si=KJIkaGI3BpyYyzi4 <br>
 
 #### Release note
-- 2025-02-11: Refactoring
-- 2025-02-04: Converted 'class' to 'struct' due to some memory issues
-- 2025-01-31: Released first
+- 2025-02-11: Released first
 
 ### 2. OsMSR-Averaging
 Used indicators: OsMA or [Pine]MACD Histogram, RSI, Stochastic, EMA <br>
@@ -39,21 +38,21 @@ Description: Grid strategy, also known as averaging, is a technique that has bee
 - 2025-02-06: Fixed errors of operator
 - 2025-02-05: Released first
 
-
-### 3. HedgeStrategy
-Used indicators: Freely developed or EMA<br>
-Property: Risk, Distance (pip), R2R <br>
-Recommended Symbol: GBPUSD, USDJPY, XAUUSD <br>
-Max Drawdown: 12.57% in XAUUSD <br>
+### 1. OsMSR-SimpleTrade
+Used indicators: OsMA or [Pine]MACD Histogram, RSI, Stochastic, EMA <br>
+Property: Martingale, Take profit(TP) & Stop loss(SL) value settings, input settings each indicators <br>
+Recommended symbol: EURUSD, USDCAD, NZDUSD, USDJPY <br>
+Maximal Drawdown: 33.14% in EURUSD <br>
 <p>
-    <img src="https://github.com/user-attachments/assets/67e5ff60-35d6-4c47-91f9-208d298ae87c", width="400" height="200">
-    <img src="https://github.com/user-attachments/assets/6589a8ab-610c-496f-bd59-ee32fb2bac5d", width="400" height="200">
+    <img src="https://github.com/user-attachments/assets/3b7a43a2-318c-4070-9962-91f39346cc4e" width="400" height="175">
+    <img src="https://github.com/user-attachments/assets/2df9e1f1-d73a-422e-b2a5-73ae096898a4" width="400" height="175">
 </p>
-
-**Reference**: https://youtu.be/NGBPq_CSha8?si=KJIkaGI3BpyYyzi4 <br>
+Description: OsMSR-SimpleTrade make an entry signal using each signal of indicators and open and close the order through the signal. The user can set values both TP and SL in the system trading property. And this is one of the trading strategies that has a risk ratio for each open position, not a grid strategy. A new position can be opened only when the open position is closed. Therefore, it is important to set the risk ratio appropriately according to the volatility range of each Symbol. While it is common to include GBPUSD as a recommended symbol, I personally don't think GBPUSD is suitable for users looking to leverage martingale properties in their trading due to its volatility range. <br>
 
 #### Release note
-- 2025-02-11: Released first
+- 2025-02-11: Refactoring
+- 2025-02-04: Converted 'class' to 'struct' due to some memory issues
+- 2025-01-31: Released first
 
 
 ### Link for Subscription

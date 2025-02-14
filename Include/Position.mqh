@@ -83,8 +83,20 @@ public:
       m_Lot    = lot;
       printData();
    }
-   void printData(void) {
+// Close the order
+   void close(void) { 
+      double price = m_Op == OP_BUY ? Bid : Ask; 
+      int closed_ticket = OrderClose(m_Ticket, m_Lot, price, TEMP_SLIPPAGE, clrOrange);
+      if (closed_ticket > 0) {
+         init();
+         print_CloseData();
+      }
+   }
+   void print_OpenData(void) {
       Print("Successfully opened the order, Ticket No.", m_Ticket, "  Entry Price: ", m_Bep, "  Lot: ", m_Lot, "  ::  ", m_Op);
+   }
+   void print_CloseData(void) {
+      Print("Successfully closed the order, Ticket No.", m_Ticket, "  Entry Price: ", m_Bep, "  Lot: ", m_Lot, "  ::  ", m_Op);
    }
 
 public:      

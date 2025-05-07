@@ -7,7 +7,7 @@ Some EAs don't deploy ex and mql files for commercial purposes. If you would lik
 
 📌 We are not responsible for any loss that may arise from applying the EAs included herein to your account.
 
-### 3. Zone-Recovery
+### 3. Zone-Recovery (filename: HegdeStrategy.mq4)
 Used indicators: Freely developed or EMA<br>
 Property: Risk, Distance (pip), R2R <br>
 Recommended Symbol: GBPUSD, USDJPY, XAUUSD <br>

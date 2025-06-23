@@ -7,6 +7,22 @@ Some EAs don't deploy ex and mql files for commercial purposes. If you would lik
 
 📌 We are not responsible for any loss that may arise from applying the EAs included herein to your account.
 
+### 5. Loss compensation based multi transaction
+Recommneded Symbol: EURUSD, XAUUSD <br>
+Max Drawdown: 22.6% in EURUSD <br>
+Description: preparing... <br>
+
+#### Release note
+- <br>
+
+### 4. Bi-directional Grid Hedge
+Used indicators: None. <br>
+preparing... <br>
+
+#### Release note
+- <br>
+
+
 ### 3. Zone-Recovery (filename: HegdeStrategy.mq4)
 Used indicators: Freely developed or EMA<br>
 Property: Risk, Distance (pip), R2R <br>

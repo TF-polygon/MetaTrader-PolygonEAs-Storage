@@ -55,7 +55,7 @@ Description: OsMSR-SimpleTrade make an entry signal using each signal of indicat
 - 2025-01-31: Released first
 
 ### Custom Indicators
-#### [Pine]MACD Histogram
+#### 1. [Pine]MACD Histogram
 This indicator is same as Oscillator MACD (OsMA) but has distinguishable colors standard by zero line. If the value of this indicator exceeds zero, the color becomes red, and if it is less than zero, the color becomes lime green.
 
 #### Release note

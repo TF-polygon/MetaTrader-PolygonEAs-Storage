@@ -53,10 +53,15 @@ int OnCalculate(const int rates_total,
                 const long &tick_volume[],
                 const long &volume[],
                 const int &spread[]) {   
-   for (int i = 0; i < rates_total; i++)
+   int i, limit;
+   limit = rates_total - prev_calculated;
+   if(prev_calculated > 0)
+      limit++;
+      
+   for (i = 0; i < limit; i++)
       macdBuffer[i] = iMA(NULL, 0, fastMA_length, 0, MODE_EMA, PRICE_CLOSE, i) - iMA(NULL, 0, slowMA_length, 0, MODE_EMA, PRICE_CLOSE, i);
       
-   for (int i = 0; i < rates_total; i++) {
+   for (i = 0; i < limit; i++) {
       double hist = macdBuffer[i] - iMAOnArray(macdBuffer, 0, signal_length, 0, MODE_EMA, i);
       ExtHistBuffer[i] = hist;
       if (hist > 0) {
